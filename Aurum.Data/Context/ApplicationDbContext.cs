@@ -19,6 +19,10 @@ public class ApplicationDbContext : DbContext
             e.Property(e => e.Id).ValueGeneratedOnAdd()
 
         );
+        //convert database type to string from guid
+        modelBuilder.Entity<Pondan>().Property(rp => rp.Id).HasConversion(
+            v => v.ToString(),
+            value => new Guid(value));
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
